@@ -96,3 +96,127 @@ Users can:
 ---
 
 ## 📂 Project Structure
+
+```
+
+curr-lumanet/
+│
+├── app.py                # Flask server
+├── model.pth             # Trained LumaNet model
+├── requirements.txt      # Dependencies
+├── runtime.txt           # Python version (3.10)
+├── Procfile              # Gunicorn start command
+├── templates/            # HTML files
+├── static/               # CSS / JS
+└── README.md
+
+````
+
+---
+
+## 🚀 Run Locally
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/SuhainaFathimaM/curr-lumanet.git
+cd curr-lumanet
+````
+
+### 2️⃣ Create virtual environment
+
+```bash
+python3.10 -m venv venv
+source venv/bin/activate
+```
+
+### 3️⃣ Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ Run application
+
+```bash
+python app.py
+```
+
+Open in browser:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## 🧪 API Usage
+
+### POST /predict
+
+Upload an image for enhancement.
+
+Example:
+
+```bash
+curl -X POST -F "file=@input.jpg" \
+https://curr-lumanet.onrender.com/predict
+```
+
+---
+
+## 🛠 Deployment (Render)
+
+Key configuration:
+
+* Python 3.10.13
+* `gunicorn app:app`
+* Clean requirements file
+* CPU-only PyTorch
+
+---
+
+## 📚 Research References
+
+1. Guo et al., Zero-Reference Deep Curve Estimation, CVPR 2020
+2. Li et al., Zero-DCE++, TPAMI 2021
+3. Ma et al., SCI Framework, CVPR 2022
+4. Gao et al., BézierCE, Sensors 2023
+5. Yu et al., Zero-TCE, Applied Sciences 2025
+
+---
+
+## 🎯 Objectives
+
+* Real-time enhancement on CPU
+* Zero-reference training
+* Lightweight architecture (~10K parameters)
+* Improve downstream vision tasks (e.g., face detection in dark)
+
+---
+
+## 👩‍💻 Developer
+
+**Suhaina Fathima M**
+Domain: Deep Learning & Computer Vision
+
+---
+
+## 📜 License
+
+For academic and research purposes.
+
+---
+
+## 🌟 Future Improvements
+
+* ONNX conversion for faster inference
+* Mobile deployment
+* Edge-device optimization
+* Integration with CCTV / webcam feed
+
+---
+
+✨ Thank you for visiting LumaNet!
+
+
