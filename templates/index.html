@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LumaNet | AI Low-Light Enhancer</title>
+
+<style>
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    --card-bg: rgba(255,255,255,0.08);
+    --text-color: white;
+    --button-gradient: linear-gradient(135deg, #00ff87, #00d4ff);
+}
+
+body.light {
+    --bg-gradient: linear-gradient(135deg, #74ebd5, #acb6e5);
+    --card-bg: white;
+    --text-color: #2c3e50;
+    --button-gradient: linear-gradient(135deg, #ff7eb3, #ff758c);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-gradient);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text-color);
+    transition: 0.4s ease;
+}
+
+/* Toggle Icon Button */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.2);
+}
+
+/* Title */
+.title-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.title-section h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+/* Card */
+.container {
+    width: 70%;
+    max-width: 900px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/* Upload */
+input[type="file"] {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #00d4ff;
+    color: black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.file-label:hover {
+    transform: scale(1.05);
+}
+
+button {
+    margin-top: 15px;
+    background: var(--button-gradient);
+    color: black;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.07);
+}
+
+/* Results */
+.result-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+img {
+    width: 300px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sun/Moon Toggle Button -->
+<button class="theme-toggle" onclick="toggleTheme()" id="themeIcon">
+    🌙
+</button>
+
+<div class="title-section">
+    <h1>LumaNet 👁️</h1>
+    <p>Upload a dark image and enhance it using AI</p>
+</div>
+
+<div class="container">
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="file" class="file-label">Choose Image</label>
+        <input type="file" id="file" name="file" accept="image/*" required>
+        <br>
+        <button type="submit">✨ Enhance Image</button>
+    </form>
+
+    {% if original_img %}
+    <div class="result-container">
+        <div>
+            <h3>Original</h3>
+            <img src="{{ original_img }}">
+        </div>
+        <div>
+            <h3 style="color:#00ff87;">Enhanced</h3>
+            <img src="{{ enhanced_img }}">
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+
+// Load saved theme on page load
+window.onload = function() {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        document.body.classList.add("light");
+        document.getElementById("themeIcon").textContent = "☀️";
+    }
+}
+
+// Toggle function
+function toggleTheme() {
+    document.body.classList.toggle("light");
+
+    const isLight = document.body.classList.contains("light");
+    const icon = document.getElementById("themeIcon");
+
+    if (isLight) {
+        localStorage.setItem("theme", "light");
+        icon.textContent = "☀️";
+    } else {
+        localStorage.setItem("theme", "dark");
+        icon.textContent = "🌙";
+    }
+}
+
+</script>
+
+</body>
+</html>
